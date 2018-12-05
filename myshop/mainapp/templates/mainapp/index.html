@@ -435,7 +435,7 @@
 										<ul role="tablist">
 											{% for subcategory in same_subcategory %}
 												{% if forloop.first %}<li role="presentation" class =" active">{% else %}<li role="presentation">{% endif %}
-												<a href="{{subcategory.display}}" role="tab" data-toggle="tab">{{subcategory.name}}</a></li>
+												<a href="#{{subcategory.display}}" role="tab" data-toggle="tab">{{subcategory.name}}</a></li>
 											{% endfor %}
 										</ul>
 									</div>
