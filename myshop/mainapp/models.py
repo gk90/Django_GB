@@ -8,7 +8,7 @@ class Category(models.Model):
         return self.name
 
 class Subcategory(models.Model):
-    name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=32, unique=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     display = models.CharField(max_length=32, unique=True)
 
