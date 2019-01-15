@@ -1,0 +1,13 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <h1>{{user.name}}</h1>
+    <img src="{{user.image.url}}">
+
+    Вы уверены что хотите удалить объект?
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Да</button>
+    </form>
+{% endblock %}
