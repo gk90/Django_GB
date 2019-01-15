@@ -6,29 +6,33 @@
 							<div class="mainmenu">
 								<nav>
 									<ul>
-										<li><a href="{% url 'index' %}">Home</a>
+										{% if user.is_authenticated %}
+											<li>
+												<a href="{% url 'authapp:edit' %}">{{ user.first_name|default:'Пользователь' }}</a>
+											</li>
+										{% endif %}
+										<li><a href="{% url 'mainapp:index' %}">Главная</a></li>
+										<li><a href="{% url 'mainapp:about' %}">О нас</a></li>
+										<li><a href="{% url 'mainapp:contact' %}">Контакты</a></li>
+										<li><a href="#">Другое</a>
 											<ul>
-												<li><a href="{% url 'index' %}">Home Versions 1</a></li>
-												<li><a href="{% url 'index' %}">Home Versions 2</a></li>
+												<li><a href="{% url 'basketapp:basket' %}">Корзина</a></li>
+												<li><a href="{% url 'authapp:login' %}">Мой аккаунт</a></li>
+												<li><a href="{% url 'authapp:register' %}">Зарегистрироваться</a></li>
 											</ul>
 										</li>
-										<li><a href="{% url 'about' %}">About Us</a></li>
-										<li class="hot"><a href="{% url 'shop' %}">Bestseller Products</a></li>
-										<li class="new"><a href="{% url 'shop-list' %}">New Products</a></li>
-										<li><a href="/shop/">Special Products</a></li>
-										<li><a href="#">Pages</a>
-											<ul>
-												<li><a href="{% url 'cart' %}">Cart</a></li>
-												<li><a href="{% url 'checkout' %}">Checkout</a></li>
-												<li><a href="{% url 'account' %}">Create Account</a></li>
-												<li><a href="{% url 'my-account' %}">My Account</a></li>
-												<li><a href="{% url 'product-details' %}">Product details</a></li>
-												<li><a href="{% url 'shop' %}">Shop Grid View</a></li>
-												<li><a href="{% url 'shop-list' %}">Shop List View</a></li>
-												<li><a href="{% url 'wishlist' %}">Wish List</a></li>
-											</ul>
+										<li>
+											{% if user.is_authenticated %}
+												<a href="{% url 'authapp:logout' %}">Выйти</a>
+											{% else %}
+												<a href="{% url 'authapp:login' %}">Войти</a>
+											{% endif %}
 										</li>
-										<li><a href="{% url 'contact' %}">Contact Us</a></li>
+										{% if user.is_superuser %}
+											<li>
+												<a href="{% url 'myadmin:main' %}">Администрирование</a>
+											</li>
+										{% endif %}
 									</ul>
 								</nav>
 							</div>
@@ -36,4 +40,3 @@
 					</div>
 				</div>
 			</div>
-			<!-- END MAIN-MENU-AREA -->

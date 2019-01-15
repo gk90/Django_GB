@@ -36,7 +36,7 @@
     18. Product-area
     19. Shop Page
     20. Shop-Filter
-    21. Product-Details Page 
+    21. Product-Details Page
     22. Cart Page
     23. Contact-Page
     24. Wishlist-Page
@@ -2003,9 +2003,9 @@ h3.widget-title-modal{
   text-transform: uppercase;
   margin: 0;
 }
-.banner-4 .word-2 {color: #ffd535;} 
+.banner-4 .word-2 {color: #ffd535;}
 .word-5 {
-  font-size: 16px; 
+  font-size: 16px;
 }
 .banner-3 h2.word-6 {
   font-size: 20px;
@@ -2117,8 +2117,8 @@ ul.page-menu li.active a {color: #e95668;}
 ul.page-menu li:hover a {color: #e95668;}
 ul.page-menu > li + li::before {
   color: #ccc;
-  content: "/Â ";
-  padding: 0 5px;	
+  content: "/";
+  padding: 0 5px;
 }
 /*-------------------------
  20. Shop-Filter
@@ -2349,7 +2349,7 @@ background-color: #e48080;
 border-color: #e48080;
 color: #fff;
 cursor: default;
-z-index: 2;	
+z-index: 2;
 }
 .pagination ul li a:hover {
 	color: #23527c;
@@ -2363,7 +2363,7 @@ z-index: 2;
   text-align: right;
 }
 /*=========================
- 21. Product-Details Page 
+ 21. Product-Details Page
 ==========================*/
 .toch-prond-menu {}
 .toch-prond-menu ul {}
@@ -2487,10 +2487,10 @@ transition: border 0.2s ease-in-out 0s;
 }
 .toch-button:hover, .toch-button.toch-add-cart, .toch-menu ul li a:hover, .toch-menu ul li.active a:hover {
   background: #26acce none repeat scroll 0 0;
-  color: #fff;	
+  color: #fff;
 }
 .toch-button.toch-add-cart:hover {
-  background: #E95668 none repeat scroll 0 0;	
+  background: #E95668 none repeat scroll 0 0;
 }
 .toch-box { margin-top: 60px;}
 .toch-menu ul {
@@ -2791,7 +2791,7 @@ blockquote {
   font-weight: 400;
   text-transform: capitalize;
 }
-/*----------------------------------- 
+/*-----------------------------------
 26. Account-Create Page
 -------------------------------------*/
 .account-create-box {

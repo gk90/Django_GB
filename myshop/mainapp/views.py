@@ -1,48 +1,75 @@
-from django.shortcuts import render
-from .models import Product, Category, Subcategory
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from .models import Product, Category
+from basketapp.models import Basket
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 # Create your views here.
-def main_view (request):
-    same_category = Category.objects.all()
-    same_subcategory = Subcategory.objects.all()
-    same_products = Product.objects.all()
+
+def getBasket(user):
+    if user.is_authenticated:
+        return Basket.objects.filter(user=user)
+    else:
+        return []
+
+def main_view(request):
+
+    categories = Category.objects.all()
+    products = Product.objects.all()
 
     content = {
         'title': 'main',
-        'same_products': same_products,
-        'same_category': same_category,
-        'same_subcategory': same_subcategory,
+        'products': products,
+        'categories': categories,
+        'basket': getBasket(request.user)
     }
 
     return render(request, 'mainapp/index.html', content)
 
-def about_view (request):
-    return render(request, 'mainapp/about.html', {'title': 'about'})
+def about_view(request):
+    content = {
+        'title': 'about',
+        'basket': getBasket(request.user)
+    }
+    return render(request, 'mainapp/about.html', content)
 
-def account_view (request):
-    return render(request, 'mainapp/account.html', {'title': 'account'})
+def contact_view(request):
+    content = {
+        'title': 'contact',
+        'basket': getBasket(request.user)
+    }
+    return render(request, 'mainapp/contact.html', content)
 
-def cart_view (request):
-    return render(request, 'mainapp/cart.html', {'title': 'cart'})
+def product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    basket = getBasket(request.user)
 
-def checkout_view (request):
-    return render(request, 'mainapp/checkout.html', {'title': 'checkout'})
+    content = {
+        'title': 'product',
+        'product': product,
+        'basket': basket
+    }
+    return render(request, 'mainapp/product-details.html', content)
 
-def contact_view (request):
-    return render(request, 'mainapp/contact.html', {'title': 'contact'})
+def product_by_category_view(request, pk, page):
+    category = get_object_or_404(Category, pk=pk)
+    products = Product.objects.filter(category=category)
 
-def account_view (request):
-    return render(request, 'mainapp/my-account.html', {'title': 'my-account'})
+    paginator = Paginator(products, 2)
+    try:
+        # получение объектов нужной сраницы
+        products_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+    except EmptyPage:
+        # последняя страница
+        products_paginator = paginator.page(paginator.num_pages)
 
-def details_view (request):
-    return render(request, 'mainapp/product-details.html', {'title': 'details'})
-
-def shop_view (request):
-    return render(request, 'mainapp/shop.html', {'title': 'shop'})
-
-def shop_list_view (request):
-    return render(request, 'mainapp/shop-list.html', {'title': 'shoplist'})
-
-def wishlist_view (request):
-    return render(request, 'mainapp/wishlist.html', {'title': 'wishlist'})
-
+    content = {
+        'title': 'Product_by_category',
+        'products': products_paginator,
+        'category': category,
+        'basket': getBasket(request.user)
+    }
+    return render(request, 'mainapp/product_by_category.html', content)
