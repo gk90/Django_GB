@@ -1,7 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm
 from mainapp.models import Product, Category
 from authapp.models import ShopUser
+
 
 class UserForm(forms.ModelForm):
 
@@ -14,6 +14,7 @@ class UserForm(forms.ModelForm):
 		for field_name, field in self.fields.items():
 			field.widget.attrs['class'] = 'form-control'
 
+
 class CategoryForm(forms.ModelForm):
 	class Meta:
 		model = Category
@@ -23,6 +24,7 @@ class CategoryForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		for field_name, field in self.fields.items():
 			field.widget.attrs['class'] = 'form-control'
+
 
 class ProductForm(forms.ModelForm):
 	is_new = forms.BooleanField(label='Новый товар')

@@ -8,7 +8,7 @@ urlpatterns = [
 
     path('users', views.users_view, name='users'),
     path('users/detail/<int:pk>', views.user_detail_view, name='user'),
-    path('categories/create/', views.user_create_view, name='create_user'),
+    path('users/create/', views.user_create_view, name='create_user'),
     path('users/update/<int:pk>', views.user_update_view, name='user_update'),
     path('users/delete/<int:pk>', views.user_delete_view , name='user_delete'),
 
@@ -20,7 +20,7 @@ urlpatterns = [
 
     path('products/', views.products_view, name='products'),
     path('products/detail/<int:pk>', views.product_detail_view, name='product'),
-    path('products/create/', views.product_create_view, name='create_product'),
+    path('products/create/product', views.product_create_view, name='create_product'),
     path('products/update/<int:pk>', views.product_update_view, name='update_product'),
     path('products/delete/<int:pk>', views.product_delete_view, name='delete_product')
 ]

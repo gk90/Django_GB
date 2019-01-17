@@ -30,16 +30,16 @@
 		{% for object in object_list %}
 			<tr>
 				<td>
-					<a href="{% url 'adminapp:category' pk=object.pk %}">{{object.name}}</a>
+					<a href="{% url 'myadmin:category' pk=object.pk %}">{{object.name}}</a>
 				</td>
 				<td>
-					<a href="{% url 'adminapp:update_category' pk=object.pk %}">Изменить</a>
+					<a href="{% url 'myadmin:update_category' pk=object.pk %}">Изменить</a>
 				</td>
 				<td>
-					<a href="{% url 'adminapp:delete_category' pk=object.pk %}">Удалить</a>
+					<a href="{% url 'myadmin:delete_category' pk=object.pk %}">Удалить</a>
 				</td>
 			</tr>
 		{% endfor %}
 	</table>
-	<a href="{% url 'adminapp:create_category' %}"> Добавить </a>
+	<a href="{% url 'myadmin:create_category' %}"> Добавить </a>
 {% endblock %}

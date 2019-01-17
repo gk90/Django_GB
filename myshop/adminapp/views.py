@@ -9,29 +9,33 @@ from django.urls import reverse, reverse_lazy
 
 from mainapp.models import Product, Category
 from authapp.models import ShopUser
-from .forms import CategoryForm ,ProductForm, UserForm
+from .forms import CategoryForm, ProductForm, UserForm
 
 # Create your views here.
 
+# views for users
 @user_passes_test(lambda u: u.is_superuser)
 def myadmin_main_view(request):
 	return render(request, 'adminapp/myadmin_main.html')
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def users_view(request):
 	users = ShopUser.objects.all()
 	return render(request, 'adminapp/users.html', {'users': users})
 
+
 @user_passes_test(lambda u: u.is_superuser)
 def user_detail_view(request, pk):
 	user = get_object_or_404(ShopUser, pk=pk)
 	return render(request, 'adminapp/user_detail.html', {'user': user})
 
+
 @user_passes_test(lambda u: u.is_superuser)
 def user_create_view(request):
 	if request.method == 'GET':
 		form = UserForm()
-		return render(request, 'adminapp/edit.html', {'form':form})
+		return render(request, 'adminapp/edit.html', {'form': form})
 	else:
 		form = UserForm(request.POST, files=request.FILES)
 		if form.is_valid():
@@ -39,6 +43,7 @@ def user_create_view(request):
 			return HttpResponseRedirect(reverse('myadmin:users'))
 		else:
 			return render(request, 'adminapp/edit.html', {'form': form})
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def user_update_view(request, pk):
@@ -54,6 +59,7 @@ def user_update_view(request, pk):
 		else:
 			return render(request, 'adminapp/edit.html', {'form': form})
 
+
 @user_passes_test(lambda u: u.is_superuser)
 def user_delete_view(request, pk):
 	user = get_object_or_404(ShopUser, pk=pk)
@@ -63,6 +69,7 @@ def user_delete_view(request, pk):
 	else:
 		return render(request, 'adminapp/user_delete_confirm.html', {'user': user})
 
+# views for categories
 class CategoryListView(ListView):
 	model = Category
 	template_name = 'adminapp/categories.html'
@@ -72,6 +79,7 @@ class CategoryListView(ListView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+
 class CategoryDetailView(DetailView):
 	model = Category
 	template_name = 'adminapp/category_detail.html'
@@ -79,6 +87,7 @@ class CategoryDetailView(DetailView):
 	@method_decorator(user_passes_test(lambda u: u.is_superuser))
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
+
 
 class CategoryCreateView(CreateView):
 	model = Category
@@ -90,15 +99,17 @@ class CategoryCreateView(CreateView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+
 class CategoryUpdateView(UpdateView):
 	model = Category
 	template_name = 'adminapp/edit.html'
 	success_url = reverse_lazy('myadmin:categories')
-	form_class = CategoryForm
+	fields = ('__all__')
 
 	@method_decorator(user_passes_test(lambda u: u.is_superuser))
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
+
 
 class CategoryDeleteView(DeleteView):
 	model = Category
@@ -109,15 +120,18 @@ class CategoryDeleteView(DeleteView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+# views for products
 @user_passes_test(lambda u: u.is_superuser)
-def products_view (request):
+def products_view(request):
 	products = Product.objects.all()
 	return render(request, 'adminapp/products.html', {'products': products})
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def product_detail_view(request, pk):
 	product = get_object_or_404(Product, pk=pk)
 	return render(request, 'adminapp/product_detail.html', {'product': product})
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def product_create_view(request):
@@ -132,6 +146,7 @@ def product_create_view(request):
 		else:
 			return render(request, 'adminapp/edit.html', {'form': form})
 
+
 @user_passes_test(lambda u: u.is_superuser)
 def product_update_view(request, pk):
 	product = get_object_or_404(Product, pk=pk)
@@ -145,6 +160,7 @@ def product_update_view(request, pk):
 			return HttpResponseRedirect(reverse('myadmin:products'))
 		else:
 			return render(request, 'adminapp/edit.html', {'form': form})
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def product_delete_view(request, pk):
