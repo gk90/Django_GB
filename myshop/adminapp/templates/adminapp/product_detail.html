@@ -1,8 +1,0 @@
-{% extends 'authapp/base.html' %}
-{% load staticfiles %}
-
-{% block content %}
-    <h1>{{product.name}}</h1>
-    Категория: {{product.category.name}}
-    <img src="{{product.image.url}}">
-{% endblock %}
