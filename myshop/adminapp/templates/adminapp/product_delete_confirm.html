@@ -1,0 +1,14 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <h1>{{product.name}}</h1>
+  Категория: {{product.category.name}}
+  <img src="{{product.image.url}}">
+
+  Вы уверены что хотите удалить объект?
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Да</button>
+  </form>
+{% endblock %}
