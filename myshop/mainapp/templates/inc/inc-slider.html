@@ -1,0 +1,39 @@
+<div class="category-slider-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- CATEGORY-MENU-LIST START -->
+        <div class="left-category-menu hidden-sm hidden-xs">
+          <div class="left-product-cat">
+            <div class="category-heading">
+              <h2>Категории</h2>
+            </div>
+            <div class="category-menu-list">
+              <ul>
+                <!-- Single menu start -->
+                <li class="arrow-plus">
+                  <a href="#">Products</a>
+                  <!--  MEGA MENU START -->
+                  <div class="cat-left-drop-menu">
+                    <div class="cat-left-drop-menu-left">
+                      <a class="menu-item-heading" href="#">Electronic</a>
+                      <ul>
+                        {% for category in categories %}
+                          <li>
+                            <a href="{% url 'mainapp:product_by_category' pk=category.pk page=1 %}">
+                              {{category.name}}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

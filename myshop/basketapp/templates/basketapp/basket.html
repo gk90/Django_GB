@@ -1,0 +1,94 @@
+{% extends "../mainapp/base.html" %}
+{% load static %}
+
+{% block title %}
+{{title|capfirst}}
+{% endblock %}
+
+{% block content %}
+<!-- START PAGE-CONTENT -->
+<section class="page-content">
+  <div class="container">
+    <div class="row">
+      <!-- Start Shopping-Cart -->
+      <div class="shopping-cart">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="cart-title">
+              <h2 class="entry-title">Корзина</h2>
+            </div>
+            <!-- Start Table -->
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <td class="text-center">Изображение</td>
+                    <td class="text-left">Категория</td>
+                    <td class="text-left">Название</td>
+                    <td class="text-left">Количество</td>
+                    <td class="text-right">Цена за один товар</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in basket_items %}
+                  <tr>
+                    <td class="text-center">
+                      <a href="#"><img class="img-thumbnail" src="{{item.product.image.url}}" alt="#"/></a>
+                    </td>
+                    <td class="text-left">
+                      <a href="#">{{item.product.category.name}}</a>
+                    </td>
+                    <td class="text-left">{{item.product.name}}</td>
+                    <td class="text-left">
+                      <div class="btn-block cart-put">
+                        <input class="form-control" type="number" placeholder="{{item.quantity}}"/>
+                        <div class="input-group-btn cart-buttons">
+                          <a href="{% url 'basket:remove' item.pk %}">
+                            <button class="btn btn-danger" data-toggle="tooltip" title="Remove">
+                              <i class="fa fa-times-circle"></i>
+                            </button>
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right">{{item.product.price}} руб.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!-- End Table -->
+
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-8">
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <td class="text-right">
+                        <strong>Количество:</strong>
+                      </td>
+                      <td class="text-right">{{basket_items.0.total_quantity}}</td>
+                    </tr>
+                    <tr>
+                      <td class="text-right">
+                        <strong>Общая стоимость:</strong>
+                      </td>
+                      <td class="text-right">{{basket_items.0.total_cost}} руб.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="shopping-checkout">
+              <a href="#" class="btn btn-primary pull-right">Заказать</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Shopping-Cart -->
+    </div>
+  </div>
+  </div>
+</section>>
+{% endblock %}
+
