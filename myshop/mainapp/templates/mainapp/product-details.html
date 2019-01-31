@@ -1,0 +1,61 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+
+{% block title %}
+  {{title|capfirst}}
+{% endblock %}
+
+{% block content %}
+
+<!-- START PAGE-CONTENT -->
+<br>
+<section class="page-content">
+  <div class="container">
+    <div class="col-md-9 col-sm-12 col-xs-12">
+      <!-- Start Toch-Prond-Area -->
+      <div class="toch-prond-area">
+        <div class="row">
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="clear"></div>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="display-1">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="toch-photo">
+                      <a href="#"><img src="{{product.image.url}}" data-imagezoom="true" alt="#"/></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7 col-xs-12">
+            <h2 class="title-product"> {{product.name}}</h2>
+            <div class="about-toch-prond">
+              <p>
+										<span class="rating">
+											<i class="fa fa-star"> {{product.rating}}</i>
+										</span>
+              </p>
+              <span class="current-price">{{product.price}} руб.</span>
+            </div>
+            <div class="about-product">
+            </div>
+            <div class="product-quantity">
+              <a href="{% url 'basketapp:add' product.pk %}">
+                <button type="submit" class="toch-button toch-add-cart">Добавить в корзину</button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>Описание</h4>
+          <p>{{product.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+<!-- END PAGE-CONTENT -->
+{% endblock %}
