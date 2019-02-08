@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IHVzZXIxMA==?=
+From: django@mail.local
+To: test@nail.ru
+Date: Tue, 05 Feb 2019 16:27:00 -0000
+Message-ID: <154938402064.11972.11176831177037733857@ZerX.IGD_Rostelecom>
+
+Для подтверждения учетной записи user10 на портале http://localhost:8000 перейдите по ссылке:
+http://localhost:8000/auth/verify/test@nail.ru/617167c962e4e40a2b5ecf08e383a3bde307cf31/
+-------------------------------------------------------------------------------
