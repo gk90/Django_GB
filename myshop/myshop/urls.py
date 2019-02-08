@@ -24,6 +24,7 @@ urlpatterns = [
     path('auth/', include('authapp.urls', namespace='authapp')),
     path('basket/', include('basketapp.urls', namespace='basket')),
     path('myadmin/', include('adminapp.urls', namespace='myadmin')),
+    path('auth/verify/google/oauth2/', include("social_django.urls", namespace="social")),
     path('admin/', admin.site.urls),
 ]
 

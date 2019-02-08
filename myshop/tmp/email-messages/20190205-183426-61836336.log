@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IHVzZXI=?=
+From: django@mail.local
+To: test@mail.ru
+Date: Tue, 05 Feb 2019 15:34:26 -0000
+Message-ID: <154938086619.12960.13137552844666897864@ZerX.IGD_Rostelecom>
+
+Для подтверждения учетной записи user на портале http://localhost:8000 перейдите по ссылке:
+http://localhost:8000/auth/verify/test@mail.ru/3cbf16ed20bbfc9f6c805fd103613184f84bcaef/
+-------------------------------------------------------------------------------
