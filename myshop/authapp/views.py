@@ -50,7 +50,6 @@ def register(request, success_registration=0):
         register_form = ShopUserRegisterForm()
 
     content = {'title': title, 'register_form': register_form}
-    
     if success_registration:
         content['register'] = 'success'
 
@@ -76,12 +75,12 @@ def edit(request):
 
 def send_verify_mail(user):
     verify_link = reverse('authapp:verify', args=[
-                          user.email, user.activation_key]) 
+                          user.email, user.activation_key])
     subject = 'Подтверждение учетной записи {}'.format(user.username)
     message = 'Для подтверждения учетной записи {} на портале {} перейдите по ссылке:\n{}{}'.format(
-        user.username, 
-        settings.DOMAIN_NAME, 
-        settings.DOMAIN_NAME, 
+        user.username,
+        settings.DOMAIN_NAME,
+        settings.DOMAIN_NAME,
         verify_link
     )
     return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
@@ -94,11 +93,11 @@ def verify_user(request, email, activation_key, backend='django.contrib.auth.bac
         user.activation_key = user.activation_key_generator()
         user.activation_key_expires = user.activation_key_expires_update()
         user.save()
-        send_verify_mail(user)        
+        send_verify_mail(user)
         return render(request, 'authapp/activation.html')
     else:
         user.is_active = True
         user.activation_key_expires = None
         user.save()
-        auth.login(request, user,  backend='django.contrib.auth.backends.ModelBackend')
+        auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         return render(request, 'authapp/activation.html')

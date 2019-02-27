@@ -5,10 +5,12 @@
       <div class="col-lg-12">
         <div class="mainmenu">
           <nav>
-            <ul>
+            <ul class="leftlist">
               <li><a href="{% url 'mainapp:index' %}">Главная</a></li>
               <li><a href="{% url 'mainapp:about' %}">О нас</a></li>
               <li><a href="{% url 'mainapp:contact' %}">Контакты</a></li>
+	    </ul>
+	    <ul class="rightlist">
               {% if user.is_authenticated %}
                 <li>
                   <div class="dropdown">
@@ -38,6 +40,17 @@
                   <a href="{% url 'authapp:login' %}">Войти</a>
                 {% endif %}
               </li>
+
+              <li>
+                <a href="{% url 'basketapp:basket' %}">
+                <span class="cart-icon"><i class="fa fa-shopping-cart"></i></span>
+                <span class="cart-item">
+                  {% if basket %}
+                    {{ basket.0.total_cost|floatformat:0 }} руб ({{ basket.0.total_quantity }} шт)
+                  {% endif %}
+                </span>
+                <span class="top-cart-price"></span>
+                                       
               {% if user.is_superuser %}
                 <li>
                   <a href="{% url 'myadmin:main' %}">Администрирование</a>
