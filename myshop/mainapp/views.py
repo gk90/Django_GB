@@ -1,42 +1,47 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import TemplateView, DetailView, ListView
 from .models import Product, Category
 
 
-# Create your views here.
-def main_view(request):
-
+class Main(TemplateView):
+    template_name = 'mainapp/index.html'
+    title = 'Главная'
     categories = Category.objects.all()
     products = Product.objects.all()
 
-    content = {
-        'title': 'main',
-        'products': products,
-        'categories': categories,
-    }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.title
+        context['categories'] = self.categories
+        context['products'] = self.products
+        return context
 
-    return render(request, 'mainapp/index.html', content)
 
-def about_view(request):
-    content = {
-        'title': 'about',
-    }
-    return render(request, 'mainapp/about.html', content)
+class About(TemplateView):
+    template_name = 'mainapp/about.html'
+    title = 'About'
 
-def contact_view(request):
-    content = {
-        'title': 'contact',
-    }
-    return render(request, 'mainapp/contact.html', content)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.title
+        return context
 
-def product(request, pk):
-    product = get_object_or_404(Product, pk=pk)
 
-    content = {
-        'title': 'product',
-        'product': product,
-    }
-    return render(request, 'mainapp/product-details.html', content)
+class Contacts(TemplateView):
+    template_name = 'mainapp/contact.html'
+    title = 'Contacts'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.title
+        return context
+
+
+class ProductDetail(DetailView):
+    template_name = 'mainapp/product-details.html'
+    model = Product
+
 
 def product_by_category_view(request, pk, page):
     category = get_object_or_404(Category, pk=pk)

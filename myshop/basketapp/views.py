@@ -6,12 +6,13 @@ from mainapp.models import Product, Category
 
 @login_required
 def basket(request):
-	basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+	basket_items = Basket.objects.filter(user=request.user).order_by('product__category').select_related()
 	content = {
 		'title': 'basket',
 		'basket_items': basket_items,
 	}
 	return render(request, 'basketapp/basket.html', content)
+
 
 @login_required
 def basket_add(request, pk):
@@ -19,7 +20,7 @@ def basket_add(request, pk):
 		return HttpResponseRedirect(reverse('mainapp:product', args=[pk]))
 
 	product = get_object_or_404(Product, pk=pk)
-	old_basket_item = Basket.objects.filter(user=request.user, product=product)
+	old_basket_item = Basket.objects.filter(user=request.user, product=product).select_related()
 
 	if old_basket_item:
 		old_basket_item[0].quantity += 1
@@ -30,6 +31,7 @@ def basket_add(request, pk):
 		new_basket_item.save()
 
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 @login_required
 def basket_remove(request, pk):

@@ -80,7 +80,7 @@
               </div>
             </div>
             <div class="shopping-checkout">
-              <a href="#" class="btn btn-primary pull-right">Заказать</a>
+              <a href="{% url 'ordersapp:order_create' %}" class="btn btn-primary pull-right">Заказать</a>
             </div>
           </div>
         </div>
@@ -91,4 +91,3 @@
   </div>
 </section>>
 {% endblock %}
-
