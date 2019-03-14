@@ -9,8 +9,8 @@
               <li><a href="{% url 'mainapp:index' %}">Главная</a></li>
               <li><a href="{% url 'mainapp:about' %}">О нас</a></li>
               <li><a href="{% url 'mainapp:contact' %}">Контакты</a></li>
-	    </ul>
-	    <ul class="rightlist">
+	          </ul>
+            <ul class="rightlist">
               {% if user.is_authenticated %}
                 <li>
                   <div class="dropdown">
@@ -32,25 +32,26 @@
                     </ul>
                   </div>
                 </li>
+                <li>
+                  <a href="{% url 'authapp:logout' %}">Выйти</a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="{% url 'authapp:login' %}">Войти</a>
+                </li>
               {% endif %}
               <li>
-                {% if user.is_authenticated %}
-                  <a href="{% url 'authapp:logout' %}">Выйти</a>
-                {% else %}
-                  <a href="{% url 'authapp:login' %}">Войти</a>
-                {% endif %}
-              </li>
-
-              <li>
-                <a href="{% url 'basketapp:basket' %}">
+                <a href="{% url 'basketapp:basket' %}"></a>
                 <span class="cart-icon"><i class="fa fa-shopping-cart"></i></span>
                 <span class="cart-item">
                   {% if basket %}
-                    {{ basket.0.total_cost|floatformat:0 }} руб ({{ basket.0.total_quantity }} шт)
+                    {% with summary=basket.0.get_summary %}
+                      {{ summary.total_cost}} руб ({{ summary.total_quantity }} шт)
+                    {% endwith %}
                   {% endif %}
                 </span>
                 <span class="top-cart-price"></span>
-                                       
+              </li>
               {% if user.is_superuser %}
                 <li>
                   <a href="{% url 'myadmin:main' %}">Администрирование</a>
