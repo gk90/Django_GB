@@ -154,4 +154,4 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
-LOW_CACHE = True
+LOW_CACHE = False

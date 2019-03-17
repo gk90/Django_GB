@@ -8,7 +8,7 @@ from django.urls import reverse, reverse_lazy
 from mainapp.models import Product, Category
 from authapp.models import ShopUser
 from .forms import CategoryForm, ProductForm, UserForm
-
+from django.db.models import F
 # Create your views	 here.
 
 # views for users
@@ -102,7 +102,15 @@ class CategoryUpdateView(UpdateView):
 	model = Category
 	template_name = 'adminapp/edit.html'
 	success_url = reverse_lazy('myadmin:categories')
-	fields = ('__all__')
+	form_class = CategoryForm
+
+	""" Добавление скидки всем связанным продуктам """
+	def form_valid(self, form):
+		if 'discount' in form.cleaned_data:
+			discount = form.cleaned_data['discount']
+			if discount:
+				self.object.product_set.update(price=F('price') * (1 - discount / 100))
+		return super().form_valid(form)
 
 	@method_decorator(user_passes_test(lambda u: u.is_superuser))
 	def dispatch(self, *args, **kwargs):
@@ -117,6 +125,7 @@ class CategoryDeleteView(DeleteView):
 	@method_decorator(user_passes_test(lambda u: u.is_superuser))
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
+
 
 # views for products
 @user_passes_test(lambda u: u.is_superuser)
