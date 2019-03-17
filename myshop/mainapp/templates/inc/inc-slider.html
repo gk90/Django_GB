@@ -9,10 +9,10 @@
             </div>
             <div class="category-menu-list">
               <ul>
-                {% for category in categories %}
+                {% for object in objects %}
                   <li class="arrow-plus">
-                    <a href="{% url 'mainapp:product_by_category' pk=category.pk page=1 %}">
-                      {{category.name}}
+                    <a href="{% url 'mainapp:product_by_category' pk=object.category.pk page=1 %}">
+                      {{object.category.name}}
                     </a>
                   </li>
                 {% endfor %}

@@ -15,17 +15,16 @@
         {% include 'inc/inc-slider.html' %}
       </div>
       <!-- END LEFT-AREA-->
-
       <!-- START RIGHT-AREA (1) -->
       <div class="col-md-9 col-sm-9">
-        {% for category in categories %}
+        {% for object in objects %}
           <div class="product-area">
             <div class="row">
               <div class="col-xs-12 col-md-12">
                 <!-- Start Product-Menu -->
                 <div class="product-menu">
                   <div class="product-title">
-                    <h3 class="title-group-2 gfont-1">{{category.name}}</h3>
+                    <h3 class="title-group-2 gfont-1">{{object.category.name}}</h3>
                   </div>
                 </div>
               </div>
@@ -37,9 +36,9 @@
                   <div class="tab-content">
                     <div class="row">
                       <div class="active-product-carosel">
+
                         <!-- Start Single-Product -->
-                        {% for product in products %}
-                          {% if product.category.name == category.name %}
+                        {% for product in object.products %}
                             <div class="col-xs-12">
                               <div class="single-product">
                                 {% if product.new %}
@@ -63,7 +62,6 @@
                                 </div>
                               </div>
                             </div>
-                          {% endif %}
                         {% endfor %}
                       </div>
                     </div>
@@ -132,5 +130,4 @@
       </div>
     </div>
   </div>
-{% endblock%}
-
+{% endblock %}
